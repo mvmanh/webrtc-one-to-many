@@ -7,6 +7,7 @@ window.onload = () => {
 async function init() {
     const peer = createPeer();
     peer.addTransceiver("video", { direction: "recvonly" })
+    console.log('init()')
 }
 
 function createPeer() {
@@ -15,11 +16,12 @@ function createPeer() {
     });
     peer.ontrack = handleTrackEvent;
     peer.onnegotiationneeded = () => handleNegotiationNeededEvent(peer);
-
+    console.log('createPeer()')
     return peer;
 }
 
 async function handleNegotiationNeededEvent(peer) {
+    console.log('handleNegotiationNeededEvent()')
     const offer = await peer.createOffer();
     await peer.setLocalDescription(offer);
     const payload = {
